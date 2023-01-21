@@ -40,57 +40,83 @@ import { View, StyleSheet ,Text} from "react-native";
 //   });
  
   
-function Row({ column }) {  
-    return (
-      <View style={styles.rowStyle}>
-        {column.map((data) => (
-          <Cell data={data} />
-        ))}
-      </View>
-   );
-  }
+// function Row({ column }) {  
+//     return (
+//       <View style={styles.rowStyle}>
+//         {column.map((data) => (
+//           <Cell data={data} />
+//         ))}
+//       </View>
+//    );
+//   }
 
-  function Cell({ data }) {
-    return (
-      <View style={styles.cellStyle}>
-        <Text>{data}</Text>
-      </View>
-    );
-  }
+//   function Cell({ data }) {
+//     return (
+//       <View style={styles.cellStyle}>
+//         <Text>{data}</Text>
+//       </View>
+//     );
+//   }
 
- export default function Grid() {
-    const data = [
-      ['gh'],
-      [15,  12],
-      [11,  8],
-      [7, 4],
-      [0,  3],
-    ];
-    return (
-      <View style={styles.gridContainer}>
-        {data.map((column) => (
-          <Row column={column} />
-        ))}
-      </View>
-    );
-  }
+//  export default function Grid() {
+//     const data = [
+//       ['gh'],
+//       [15,  12],
+//       [11,  8],
+//       [7, 4],
+//       [0,  3],
+//     ];
+//     return (
+//       <View style={styles.gridContainer}>
+//         {data.map((column) => (
+//           <Row column={column} />
+//         ))}
+//       </View>
+//     );
+//   }
 
 
-  const styles = StyleSheet.create({
-    gridContainer: {
-        // width: 220,
+//   const styles = StyleSheet.create({
+//     gridContainer: {
+//         // width: 220,
        
-    },
-    rowStyle: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      borderBottomColor:"black",
-      borderBottomWidth:2
-    },
-    cellStyle: {
-      flex: 1,
-      margin: 10,
-      textAlign:'center'
-    },
-  });
+//     },
+//     rowStyle: {
+//       flexDirection: "row",
+//       alignItems: "center",
+//       justifyContent: "space-between",
+//       borderBottomColor:"black",
+//       borderBottomWidth:0.5,
+//       margin:3
+      
+//     },
+//     cellStyle: {
+//       flex: 1,
+//       margin: 10,
+//       textAlign:'center'
+//     }
+//   });
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import Table from 'react-native-table-component';
+
+const tableHead = ['Head1', 'Head2', 'Head3'];
+const tableData = [
+  ['1', '2', '3'],
+  ['a', 'b', 'c'],
+  ['x', 'y', 'z']
+];
+
+export default class App extends Component {
+  render() {
+    return (
+      <View>
+        <Table
+          tableHead={tableHead}
+          tableData={tableData}
+          widthArr={[100, 100, 100]}
+        />
+      </View>
+    );
+  }
+}
