@@ -1,197 +1,128 @@
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  *
-//  * @format
-//  * @flow strict-local
-//  */
-
-//  import React, {Component} from 'react';
-//  import {
-//    SafeAreaView,
-//    StyleSheet,
-//    ScrollView,
-//    View,
-//    Text,
-//    StatusBar,
-//    ImageBackground,
-//    Image
-//  } from 'react-native';
-//  import HomeScreen from '../Screens/Homescreen';
-//  import AboutScreen from '../Screens/Aboutscreen';
-//  import ContactScreen from '../Screens/Contactscreen';
-//  import ServiceScreen from '../Screens/Servicescreen';
- 
-//  import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
-//  import { createDrawerNavigator } from '@react-navigation/drawer';
-//  import { createAppContainer } from 'react-navigation';
-
-//  import Icon from 'react-native-vector-icons/FontAwesome';
-//  import black from '../Images/fav.png';
-//  import fav from '../Images/fav.png';
- 
-//   class Drawer extends Component{
-//     render(){
-//       return(
-//        <App2 />
-//       );
-//     }
-//   }
- 
-//   const CustomDrawerContentComponent = (props)=>(
-//     <View>
-//       <SafeAreaView>
-//         <View style={{justifyContent:'center', height:200}}>
-//          <ImageBackground source={black} style={styles.backgroundContainer}/>
-//          <Image source={fav} style={styles.drawerImage} />
-//          <Text style={styles.imageText}>
-//             ... Stunning innovations
-//          </Text>
-//         </View>
-//         <View>
-//          <DrawerItems {...props} />
-//         </View>
-//       </SafeAreaView>
-//     </View>
-//   )
- 
-//   const DrawerNavigator = createDrawerNavigator({
-//     Home:{
-//       screen:HomeScreen,
-//       navigationOptions:{
-//         drawerIcon: (
-//           <Icon name="home" size={24} color="#cc5500" />
-//         ),
-//       },
-//     },
-//     About:{
-//      screen:AboutScreen,
-//      navigationOptions:{
-//        drawerIcon: (
-//          <Icon name="info-circle" size={24} color="#cc5500" />
-//        ),
-//      },
-//    },
- 
-//    Contact:{
-//      screen:ContactScreen,
-//      navigationOptions:{
-//        drawerIcon: (
-//          <Icon name="envelope" size={24} color="#cc5500" />
-//        ),
-//      },
-//    },
- 
-//    Service:{
-//      screen:ServiceScreen,
-//      navigationOptions:{
-//        drawerIcon: (
-//          <Icon name="cog" size={24} color="#cc5500" />
-//        ),
-//      },
-//    },
- 
-//   },{
-//     initialRouteName: 'Home',
-//     contentComponent: CustomDrawerContentComponent,
-//     drawerPosition: 'left',
-//     drawerOpenRoute: 'DrawerOpen',
-//     drawerCloseRoute: 'DrawerClose',
-//     drawerToggleRoute: 'DrawerToggle'
-//   })
- 
-//   const App2 = createAppContainer(DrawerNavigator)
- 
-//   const styles = StyleSheet.create({
-//     container:{
-//       flex:1,
-//       alignItems:'center',
-//       justifyContent: 'center'
-//     },
-//     backgroundContainer:{
-//       flex:1,
-//       position: 'absolute',
-//       top:0,
-//       left:0,
-//       right:0,
-//       bottom:0,
-//       alignItems:'center'
-//     },
-//     drawerImage:{
-//       height:50,
-//       width:50,
-//       alignSelf:'center'
-//     },
-//     imageText:{
-//       alignSelf:'center',
-//       color: '#fff',
-//       padding:10,
-//       fontWeight: 'bold',
-//       fontStyle: 'italic'
-//     }
-//   });
- 
-//  export default Drawer;
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Image, TouchableHighlight } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 
-function Drawer() {
-  const [isClicked, setIsClicked] = useState(false);
+import React, { useRef } from 'react';
+import { DrawerLayoutAndroid } from 'react-native';
+
+import HomeScreen from '../Screens/Homescreen';
+// import AboutScreen from '../Screens/Aboutscreen';
+// import ContactScreen from '../Screens/Contactscreen';
+// import ServiceScreen from '../Screens/Servicescreen';
+
+const MyDrawer = () => {
+
+  const [pages,setPages] = useState([
+   true,false,false,false,false
+])
+
+const changePage =(index)=>{
+    return setPages(pages.map((e,i)=>{
+      closeDrawer()
+      if(i==index){
+        return true
+      }else{
+        return false
+      }
+    }))
+}
+
   const [data,setData]=useState([
-    {select: 'Home'},
-    {select:'Reading'},
-    {select: 'Urdu Translation'},
-    {select: 'About'},
-    {select: 'Privacy'},
-    
-    
-  ]);
-  return (
-    <View style={styles.container}>
-     
-      {/* <Text style={styles.heading}>Dropdown item</Text> */}
-      
+        {select: 'Home'},
+        {select:'Reading'},
+        {select: 'Urdu Translation'},
+        {select: 'About'},
+        {select: 'Privacy'}])
+
+  const drawerRef = useRef(null);
+
+  const openDrawer = () => {
+    drawerRef.current.openDrawer();
+  };
+
+  const closeDrawer = () => {
+    drawerRef.current.closeDrawer();
+  };
+
+  const navigationView = (
+    <View style={{ flex: 1}}>
       <View style={styles.DropdownSelect} >
-        <Image source={require('../Images/img1.png')} style={styles.heading} />
-        <Text>Online Quran Translation</Text>
-
-        <TouchableOpacity onPress=
-        {() => setIsClicked(!isClicked)}>
-        {isClicked ? (
-          <Image source={require('../Images/khan.png')} style={styles.icon} />
-        ) : (
-          <Image source={require('../Images/khan.png')} style={styles.icon} />
-        )}
-        </TouchableOpacity>
-      </View>
-
-      {isClicked ? (
-        <View style={styles.dropdownArea}> 
-        <FlatList data={data}renderItem={({item,index})=>{
+      
+       <Image source={require('../Images/img1.png')} style={styles.heading} />
+       <Text>Online Quran Translation</Text>
+     </View>
+      <FlatList data={data}renderItem={({item,index})=>{
           return(
             <TouchableHighlight style={styles.countryItem}
             activeOpacity={0.6}
             underlayColor="#0000FF"
-            onPress={()=>{}}
+            onPress={()=>changePage(index)}
             >
+
+             <View style={{flexDirection:"row"}}>
+             <Text style={{marginRight:10}}>home</Text>
               <Text>{item.select}</Text>
+             </View>
             </TouchableHighlight>
           )
-        }}/>       
-          
-    
-        </View>
-        ):null
-        }
-      
-          </View>
+        }}/>
+    </View>
+  );
 
-  )
-}
+  return (
+    <DrawerLayoutAndroid
+      ref={drawerRef}
+      drawerWidth={300}
+      drawerPosition={DrawerLayoutAndroid.positions.Left}
+      renderNavigationView={() => navigationView}
+    >
+      <View style={styles.container}>
+     
+     
+     <View style={styles.DropdownSelect} >
+       <Image source={require('../Images/img1.png')} style={styles.heading} />
+       <Text>Online Quran Translation</Text>
 
-export default Drawer;
+       <TouchableOpacity onPress=
+       {openDrawer}>
+          <Image source={require('../Images/khan.png')} style={styles.icon} />
+       </TouchableOpacity>
+     </View>
+     {
+      pages[0]?<HomeScreen/>:null
+     }
+
+     {
+      pages[1]?<View>
+        <Text>Reading</Text>
+      </View>:null
+     }
+     {
+      pages[2]?<View>
+        <Text>Urdu</Text>
+      </View>:null
+     }
+     {
+      pages[3]?<View>
+      <Text>About</Text>
+      </View>:null
+     }
+     {
+      pages[4]?<View>
+        
+        <Text>Privacy</Text>
+      </View>:null
+     }
+
+    </View>
+
+    </DrawerLayoutAndroid>
+  );
+};
+
+export default MyDrawer;
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -230,11 +161,10 @@ const styles = StyleSheet.create({
 
   },
   countryItem:{
-    width:'80%',
-    height:50,
-    borderBottomWidth:.2,
-    borderBottomColor:'#8e8e8e',
-    padding:10,
+    width:'100%',
+    padding:15,
+    margin:2,
+    backgroundColor:"#8e8e8e"
     }
  
 })
