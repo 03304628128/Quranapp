@@ -59,12 +59,12 @@ const changePage =(index)=>{
           return(
             <TouchableHighlight style={styles.countryItem}
             activeOpacity={0.6}
-            underlayColor="#0000FF"
+            underlayColor="rgb(198, 203, 207)"
             onPress={()=>changePage(index)}
             >
 
              <View style={{flexDirection:"row"}}>
-             <Text style={{marginRight:10}}>home</Text>
+             <Text style={{marginRight:10}}></Text>
               <Text>{item.select}</Text>
              </View>
             </TouchableHighlight>
@@ -77,7 +77,7 @@ const changePage =(index)=>{
     <DrawerLayoutAndroid
       ref={drawerRef}
       drawerWidth={300}
-      drawerPosition={DrawerLayoutAndroid.positions.Left}
+      // drawerPosition={DrawerLayoutAndroid.positions}
       renderNavigationView={() => navigationView}
     >
       <View style={styles.container}>
@@ -159,7 +159,9 @@ const styles = StyleSheet.create({
     width:'100%',
     padding:15,
     margin:2,
-    backgroundColor:"#8e8e8e"
+    // backgroundColor:"#8e8e8e"
+    borderBottomWidth:2,
+    borderBottomColor:"black"
     }
  
 })

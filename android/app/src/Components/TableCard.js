@@ -33,7 +33,7 @@ export default function TableCard(props) {
   ]
   return (
     <View style={styles.table}>
-          <View style={{...styles.row,...{backgroundColor:'gray'}}}>
+          <View style={{...styles.row,...{backgroundColor:"rgb(198, 203, 207)"}}}>
                    <View style={styles.column}> 
                         <Text style={styles.text}>SURAH INFORMATION</Text>
                   </View>  
@@ -52,7 +52,7 @@ export default function TableCard(props) {
                             <Text>Surah Name</Text>
                       </View>  
                       <View style={styles.column}> 
-                            <Text>{props.data.name}</Text>
+                           <Text style={{textAlign:'justify'}}>{props.data.name}</Text>
                      </View>
               </View>
               <View style={styles.row}>

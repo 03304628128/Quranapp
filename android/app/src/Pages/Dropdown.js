@@ -10,9 +10,7 @@ function Dropdown(props) {
       <TouchableOpacity style={styles.DropdownSelect} onPress=
         {() => setIsClicked(!isClicked)}>
         <Text>{props.selectedData.transliteration}</Text>
-        {isClicked ? (
-          <Image source={require('../Images/upload.png')} style={styles.icon} />
-        ) : (
+        { (
           <Image source={require('../Images/dropdown.png')} style={styles.icon} />
         )}
       </TouchableOpacity>
@@ -23,7 +21,7 @@ function Dropdown(props) {
           return(
             <TouchableHighlight style={styles.countryItem}
             activeOpacity={0.6}
-            underlayColor="#0000FF"
+            underlayColor="rgb(198, 203, 207)"
             onPress={()=>{
               props.setSel(item.id)
               setIsClicked(!isClicked)
@@ -32,7 +30,10 @@ function Dropdown(props) {
               <Text>{item.transliteration}</Text>
             </TouchableHighlight>
           )
-        }}/>       
+        }}
+
+        keyExtractor={item=>item.id}
+        />       
           
     
         </View>

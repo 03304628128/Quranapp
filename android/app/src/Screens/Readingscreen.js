@@ -44,8 +44,8 @@ export default function Card1  () {
       <Dropdown setSel={setSelect}  data={resData} selectedData={data}/>
       <TableCard data={data}/>
       
-      <Card style={{margin:5,backgroundColor:'#00aadd',borderRadius:10}}>
-        <View style={{flex:1,padding:10,margin:5}}>
+      <Card style={{margin:5,backgroundColor:'white',borderRadius:10}}>
+        <View style={{flex:1,padding:10,margin:5,alignItems:'center'}}>
           
           <Text style={{flex:1,fontSize:25,textAlign:'center',borderBottomWidth:2}}>{data.transliteration}</Text>
         </View>
@@ -54,7 +54,7 @@ export default function Card1  () {
      <FlatList
       data={data.verses}
       renderItem={({item})=>
-      <Card style={{margin:5,backgroundColor:'#00aadd',borderRadius:10}}>
+      <Card style={{margin:5,backgroundColor:'white',borderRadius:10}}>
         <View style={{flex:1,padding:10,flexDirection:'row',marginLeft:20}}>
           
           <Text style={{flex:1,fontSize:15}}>{item.text}</Text>
