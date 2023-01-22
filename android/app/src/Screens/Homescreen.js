@@ -1,57 +1,80 @@
-import React, { Component } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { FlatList, View ,Text, ScrollView,Neomorph} from 'react-native'
 import {Card} from 'react-native-paper'
 import ImageCarousel from '../Components/Carousel';
+import TableCard from '../Components/TableCard';
+import Dropdown from '../Pages/Dropdown';
+import Reading from './Readingscreen';
+
+import axios from 'axios'
 
 // import { Neomorph } from 'react-native-neomorph-shadows';
 
 
 
 
-export default class Card1 extends Component {
-  constructor(props){
-    super(props);
-      this.state={
-        StudentList:[
-          {ID:'1',Rollno:'34kljnojohnhnhniuni  uhigbigig5',studentame:'zawanipos ffh '},
-          {ID:'2',Rollno:'346',studentame:'zawan',course:'eng'},
-          {ID:'3',Rollno:'347',studentame:'zawan',course:'eng'},
-          {ID:'4',Rollno:'348',studentame:'zawan',course:'eng'},
-          {ID:'5',Rollno:'349',studentame:'zawan',course:'eng'},
-          {ID:'6',Rollno:'342',studentame:'zawan',course:'eng'},
-          {ID:'1',Rollno:'345',studentame:'zawan',course:'eng'},
-          {ID:'2',Rollno:'346',studentame:'zawan',course:'eng'},
-        
+export default function Card1  () {
 
-        ]
+  const [select,setSelect] = useState(1)
+  const [data,setData] = useState({})
+  const [resData,setResData] = useState(null)
+
+
+    const getData = async()=>{
+      try{
+          const res = await axios.get('https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_en.json')
+          console.log(res.data)
+          setResData(res.data)
+          setData(res.data[0])
+      }catch(err){
+          console.log(err)
       }
-    }
-  
-  render() {
+  }
+
+    useEffect(()=>{
+        getData()
+    },[])
+
+    useEffect(()=>{
+      if(resData){
+        setData(resData[select-1])
+        console.log(data)
+      }
+    },[select])
+
     return (
-      <ScrollView style={{flex:1,padding:5}}>
+      resData?<ScrollView style={{flex:1,padding:5}}>
 
       <ImageCarousel/>
-
- 
+      <Dropdown setSel={setSelect}  data={resData} selectedData={data}/>
+      <TableCard data={data}/>
+      
+      <Card style={{margin:5,backgroundColor:'#00aadd',borderRadius:10}}>
+        <View style={{flex:1,padding:10,margin:5}}>
+          
+          <Text style={{flex:1,fontSize:25,textAlign:'center',borderBottomWidth:2}}>{data.transliteration}</Text>
+        </View>
+      </Card>
+      
      <FlatList
-      data={this.state.StudentList}
+      data={data.verses}
       renderItem={({item})=>
       <Card style={{margin:5,backgroundColor:'#00aadd',borderRadius:10}}>
         <View style={{flex:1,padding:10,flexDirection:'row',marginLeft:20}}>
           
-          <Text style={{flex:1,fontSize:15}}>{item.Rollno}</Text>
+          <Text style={{flex:1,fontSize:15}}>{item.text}</Text>
         </View>
         <View style={{flex:1,padding:10,flexDirection:'row',marginLeft:20}}>
           
-          <Text style={{flex:1,fontSize:15}}>{item.studentame}</Text>
+          <Text style={{flex:1,fontSize:15}}>{item.translation}</Text>
         </View>
        
       </Card>
       }
-      keyExtractor={item=>item.ID}
+      keyExtractor={item=>item.id}
      />
-      </ScrollView>
+     <View style={{height:20}}></View>
+      </ScrollView>:null
     )
-  }
+  
 }

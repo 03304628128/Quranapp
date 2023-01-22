@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from 'react'
-import { FlatList, View ,Text, ScrollView} from 'react-native'
+import { FlatList, View ,Text, ScrollView,Neomorph} from 'react-native'
 import {Card} from 'react-native-paper'
 import ImageCarousel from '../Components/Carousel';
 import TableCard from '../Components/TableCard';
@@ -7,6 +7,11 @@ import Dropdown from '../Pages/Dropdown';
 import Reading from './Readingscreen';
 
 import axios from 'axios'
+
+// import { Neomorph } from 'react-native-neomorph-shadows';
+
+
+
 
 export default function Card1  () {
 
@@ -17,7 +22,7 @@ export default function Card1  () {
 
     const getData = async()=>{
       try{
-          const res = await axios.get('https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_en.json')
+          const res = await axios.get('https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_ur.json')
           console.log(res.data)
           setResData(res.data)
           setData(res.data[0])
@@ -59,10 +64,10 @@ export default function Card1  () {
           
           <Text style={{flex:1,fontSize:15}}>{item.text}</Text>
         </View>
-        {/* <View style={{flex:1,padding:10,flexDirection:'row',marginLeft:20}}>
+        <View style={{flex:1,padding:10,flexDirection:'row',marginLeft:20}}>
           
           <Text style={{flex:1,fontSize:15}}>{item.translation}</Text>
-        </View> */}
+        </View>
        
       </Card>
       }

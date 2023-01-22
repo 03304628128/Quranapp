@@ -10,6 +10,9 @@ import Carousel from "./android/app/src/Components/Carousel";
 import ImageCarousel from "./android/app/src/Components/Carousel";
 import Card from "./android/app/src/Components/Card";
 import Card1 from "./android/app/src/Screens/Homescreen";
+import Privacy from "./android/app/src/Screens/Pravicyscreen";
+
+
 
 // import Dropdown from "./android/app/src/Pages/Dropdown";
 
@@ -20,13 +23,14 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
 
+    // <Privacy/>
    <Drawer/>  
   //  <Abc1/>
-  // // <TableCard/>
+  //  <TableCard/>
   // <Carousel/>
   // <ImageCarousel/>
-
-
+  
+    
   );
 }
 

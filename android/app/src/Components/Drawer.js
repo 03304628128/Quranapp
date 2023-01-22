@@ -9,6 +9,10 @@ import HomeScreen from '../Screens/Homescreen';
 // import AboutScreen from '../Screens/Aboutscreen';
 // import ContactScreen from '../Screens/Contactscreen';
 // import ServiceScreen from '../Screens/Servicescreen';
+import Reading from '../Screens/Readingscreen';
+import UrduTranslation from '../Screens/Urduscreen';
+import Pravicyscreen from '../Screens/Pravicyscreen';
+import Aboutscreen from '../Screens/Aboutscreen';
 
 const MyDrawer = () => {
 
@@ -93,25 +97,16 @@ const changePage =(index)=>{
      }
 
      {
-      pages[1]?<View>
-        <Text>Reading</Text>
-      </View>:null
+      pages[1]?<Reading/>:null
      }
      {
-      pages[2]?<View>
-        <Text>Urdu</Text>
-      </View>:null
+      pages[2]?<UrduTranslation/>:null
      }
      {
-      pages[3]?<View>
-      <Text>About</Text>
-      </View>:null
+      pages[3]?<Aboutscreen/>:null
      }
      {
-      pages[4]?<View>
-        
-        <Text>Privacy</Text>
-      </View>:null
+      pages[4]?<Pravicyscreen/>:null
      }
 
     </View>
