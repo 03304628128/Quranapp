@@ -85,7 +85,7 @@ const HomeCarousel = () => {
         pagingEnabled>
         {carouselImages.map((value, key) => (
           <Image
-            source={value}
+            source={value} key={key}
             style={{width: dimension?.width-10, height: 200, resizeMode: 'cover',marginRight:10,borderRadius:10}}
             PlaceholderContent={<ActivityIndicator />}
           />

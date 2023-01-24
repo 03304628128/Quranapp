@@ -4,36 +4,13 @@ import {Card} from 'react-native-paper'
 import ImageCarousel from '../Components/Carousel';
 import TableCard from '../Components/TableCard';
 import Dropdown from '../Pages/Dropdown';
-import Reading from './Readingscreen';
-
-import axios from 'axios'
-
-// import { Neomorph } from 'react-native-neomorph-shadows';
-
-
-
+import data_ur from "./data_ur.json"
 
 export default function Card1  () {
 
   const [select,setSelect] = useState(1)
-  const [data,setData] = useState({})
-  const [resData,setResData] = useState(null)
-
-
-    const getData = async()=>{
-      try{
-          const res = await axios.get('https://cdn.jsdelivr.net/npm/quran-json@3.1.2/dist/quran_ur.json')
-          console.log(res.data)
-          setResData(res.data)
-          setData(res.data[0])
-      }catch(err){
-          console.log(err)
-      }
-  }
-
-    useEffect(()=>{
-        getData()
-    },[])
+  const [data,setData] = useState(data_ur[0])
+  const [resData,setResData] = useState(data_ur)
 
     useEffect(()=>{
       if(resData){
